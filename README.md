@@ -13,7 +13,7 @@ Este é um projeto de cartão de visitas digital (VCard) com uma estética **Cyb
 
 ## ⚙️ Como Reativar o Efeito 3D Tilt
 
-O efeito de inclinação 3D foi desativado a pedido, mas o código foi mantido comentado para facilitar a reativação. Siga os passos abaixo para ativar novamente:
+O efeito de inclinação 3D foi desativado, mas o código foi mantido comentado para facilitar a reativação. Siga os passos abaixo para ativar novamente:
 
 ### 1. No arquivo `script.js`
 Localize o bloco numerado como `// 3. 3D Tilt Effect & Sensors` (por volta da linha 298) e remova as tags de comentário `/*` no início e `*/` no final do bloco.
