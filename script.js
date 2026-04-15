@@ -40,33 +40,61 @@ END:VCARD`;
     });
 
     const btnShare = document.getElementById('btn-share');
-    btnShare.addEventListener('click', async () => {
+    const modal = document.getElementById('share-modal');
+    const qrContainer = document.getElementById('modal-qrcode-container');
+    const btnCloseModal = document.getElementById('btn-close-modal');
+    const btnModalShare = document.getElementById('btn-modal-share');
+
+    const showFeedback = (text) => {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--secondary-neon);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-family: var(--font-cyber);
+            font-size: 0.8rem;
+            z-index: 1100;
+            box-shadow: 0 0 15px var(--secondary-neon);
+            animation: fadeInOut 2s forwards;
+        `;
+        toast.innerText = text;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 2000);
+    };
+
+    const openModal = () => {
+        qrContainer.innerHTML = '';
+        new QRCode(qrContainer, {
+            text: window.location.href,
+            width: 180,
+            height: 180,
+            colorDark : "#000000",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+        });
+        modal.classList.add('active');
+    };
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+    };
+
+    btnShare.addEventListener('click', openModal);
+    btnCloseModal.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    btnModalShare.addEventListener('click', async () => {
         const shareData = {
             title: 'Eduardo Luparele | VCard',
             text: 'Confira o cartão de visitas digital de Eduardo Luparele!',
             url: window.location.href
-        };
-
-        const showFeedback = (text) => {
-            const toast = document.createElement('div');
-            toast.style.cssText = `
-                position: fixed;
-                bottom: 20px;
-                left: 50%;
-                transform: translateX(-50%);
-                background: var(--secondary-neon);
-                color: white;
-                padding: 10px 20px;
-                border-radius: 5px;
-                font-family: var(--font-cyber);
-                font-size: 0.8rem;
-                z-index: 1000;
-                box-shadow: 0 0 15px var(--secondary-neon);
-                animation: fadeInOut 2s forwards;
-            `;
-            toast.innerText = text;
-            document.body.appendChild(toast);
-            setTimeout(() => toast.remove(), 2000);
         };
 
         try {
