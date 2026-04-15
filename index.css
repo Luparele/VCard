@@ -75,6 +75,36 @@ body {
     text-align: center;
     margin-bottom: 30px;
     width: 100%;
+    position: relative;
+}
+
+.share-icon-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: transparent;
+    border: 1px solid var(--primary-neon);
+    color: var(--primary-neon);
+    width: 40px;
+    height: 40px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 100;
+    box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.share-icon-btn:hover {
+    background: rgba(0, 243, 255, 0.1);
+    box-shadow: var(--glow-primary);
+    transform: scale(1.1);
+}
+
+.share-icon-btn i {
+    font-size: 1.2rem;
 }
 
 .profile-pic-container {

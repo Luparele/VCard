@@ -47,23 +47,56 @@ END:VCARD`;
             url: window.location.href
         };
 
+        const showFeedback = (text) => {
+            const toast = document.createElement('div');
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: var(--secondary-neon);
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                font-family: var(--font-cyber);
+                font-size: 0.8rem;
+                z-index: 1000;
+                box-shadow: 0 0 15px var(--secondary-neon);
+                animation: fadeInOut 2s forwards;
+            `;
+            toast.innerText = text;
+            document.body.appendChild(toast);
+            setTimeout(() => toast.remove(), 2000);
+        };
+
         try {
-            if (navigator.share) {
+            if (navigator.share && window.location.protocol === 'https:') {
                 await navigator.share(shareData);
             } else {
-                // Fallback: Copy to clipboard
                 await navigator.clipboard.writeText(window.location.href);
-                btnShare.querySelector('.btn-content').innerHTML = '<i class="fas fa-check"></i> LINK COPIADO';
-                setTimeout(() => {
-                    btnShare.querySelector('.btn-content').innerHTML = '<i class="fas fa-share-nodes"></i> COMPARTILHAR';
-                }, 3000);
+                showFeedback('LINK COPIADO!');
             }
         } catch (err) {
-            console.error('Erro ao compartilhar:', err);
+            if (err.name !== 'AbortError') {
+                await navigator.clipboard.writeText(window.location.href);
+                showFeedback('LINK COPIADO!');
+            }
         }
     });
 
-    // Add random glitch intensity to certain elements
+    // Add fadeInOut animation to CSS dynamically
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translate(-50%, 20px); }
+            20% { opacity: 1; transform: translate(-50%, 0); }
+            80% { opacity: 1; transform: translate(-50%, 0); }
+            100% { opacity: 0; transform: translate(-50%, -20px); }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // Add random glitch intensity
     const glitchIntensity = () => {
         const text = document.querySelector('.glitchText');
         if (text) {
