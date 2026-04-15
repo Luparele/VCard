@@ -295,18 +295,75 @@ URL;TYPE=Instagram:${contact.instagram}`;
     };
     animateParticles();
 
-    // 3. 3D Tilt Effect
+    // 3. 3D Tilt Effect & Sensors
     const mainCard = document.getElementById('main-card');
-    document.addEventListener('mousemove', (e) => {
-        const xAxis = (window.innerWidth / 2 - e.pageX) / 25;
-        const yAxis = (window.innerHeight / 2 - e.pageY) / 25;
+    let hasSensorPermission = false;
+
+    const handleTilt = (x, y) => {
+        const xAxis = (window.innerWidth / 2 - x) / 20;
+        const yAxis = (window.innerHeight / 2 - y) / 20;
         mainCard.style.setProperty('--rx', `${yAxis}deg`);
         mainCard.style.setProperty('--ry', `${-xAxis}deg`);
+    };
+
+    // Mouse tilt
+    document.addEventListener('mousemove', (e) => {
+        handleTilt(e.pageX, e.pageY);
     });
 
-    document.addEventListener('mouseleave', () => {
+    // Touch tilt
+    document.addEventListener('touchmove', (e) => {
+        const touch = e.touches[0];
+        handleTilt(touch.pageX, touch.pageY);
+    }, { passive: true });
+
+    // Reset tilt
+    const resetTilt = () => {
         mainCard.style.setProperty('--rx', '0deg');
         mainCard.style.setProperty('--ry', '0deg');
-    });
+    };
+
+    document.addEventListener('mouseleave', resetTilt);
+    document.addEventListener('touchend', resetTilt);
+
+    // Gyroscope (Device Orientation)
+    const handleOrientation = (e) => {
+        if (!e.beta || !e.gamma) return;
+        
+        // beta: front/back tilt (-180 to 180)
+        // gamma: left/right tilt (-90 to 90)
+        // Normalizing for a subtle effect (+/- 15deg)
+        const rx = Math.max(-15, Math.min(15, e.beta - 45)); // Adjusted for typical viewing angle
+        const ry = Math.max(-15, Math.min(15, e.gamma));
+        
+        mainCard.style.setProperty('--rx', `${rx}deg`);
+        mainCard.style.setProperty('--ry', `${ry}deg`);
+    };
+
+    // Sensor Permission Flow (Internal/iOS)
+    const requestSensorPermission = async () => {
+        if (hasSensorPermission) return;
+        
+        if (typeof DeviceOrientationEvent !== 'undefined' && typeof DeviceOrientationEvent.requestPermission === 'function') {
+            try {
+                const permissionState = await DeviceOrientationEvent.requestPermission();
+                if (permissionState === 'granted') {
+                    window.addEventListener('deviceorientation', handleOrientation);
+                    hasSensorPermission = true;
+                }
+            } catch (error) {
+                console.error('Erro ao solicitar permissão de sensor:', error);
+            }
+        } else {
+            // Android or other browsers
+            window.addEventListener('deviceorientation', handleOrientation);
+            hasSensorPermission = true;
+        }
+    };
+
+    // Trigger permission on first interaction
+    document.addEventListener('mousedown', requestSensorPermission, { once: true });
+    document.addEventListener('touchstart', requestSensorPermission, { once: true });
 });
+
 
