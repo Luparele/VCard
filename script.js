@@ -365,5 +365,3 @@ URL;TYPE=Instagram:${contact.instagram}`;
     document.addEventListener('mousedown', requestSensorPermission, { once: true });
     document.addEventListener('touchstart', requestSensorPermission, { once: true });
 });
-
-

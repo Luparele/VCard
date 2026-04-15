@@ -288,7 +288,7 @@ h1 {
     color: white;
 }
 
-/* System Status Terminal */
+/* System Status Section */
 .system-status {
     margin-top: 30px;
     padding: 15px;
@@ -623,4 +623,3 @@ h1 {
     0% { left: -100%; }
     100% { left: 100%; }
 }
-
