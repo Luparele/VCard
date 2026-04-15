@@ -96,16 +96,6 @@ END:VCARD`;
     `;
     document.head.appendChild(style);
 
-    // Initialize QR Code
-    new QRCode(document.getElementById("qrcode"), {
-        text: "https://luparele.github.io/VCard/",
-        width: 156,
-        height: 156,
-        colorDark : "#000000",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-    });
-
     // Add random glitch intensity
     const glitchIntensity = () => {
         const text = document.querySelector('.glitchText');
