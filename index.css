@@ -1,0 +1,271 @@
+:root {
+    --bg-color: #05010a;
+    --primary-neon: #00f3ff;
+    --secondary-neon: #ff003c;
+    --accent-neon: #fee715;
+    --text-color: #ffffff;
+    --card-bg: rgba(13, 2, 33, 0.7);
+    --btn-bg: rgba(0, 243, 255, 0.1);
+    --font-cyber: 'Orbitron', sans-serif;
+    --font-main: 'Rajdhani', sans-serif;
+    --glow-primary: 0 0 15px rgba(0, 243, 255, 0.8), 0 0 5px rgba(0, 243, 255, 1);
+    --glow-secondary: 0 0 15px rgba(255, 0, 60, 0.8), 0 0 5px rgba(255, 0, 60, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: #05010a !important;
+    color: var(--text-color);
+    font-family: var(--font-main);
+    overflow-x: hidden;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.cyber-container {
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    z-index: 1;
+}
+
+/* Background Effects */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        transparent 50%,
+        rgba(0, 0, 0, 0.5) 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.1;
+}
+
+.noise {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
+    opacity: 0.05;
+    pointer-events: none;
+    z-index: 9;
+}
+
+/* Profile Header */
+.profile-header {
+    text-align: center;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.profile-pic-container {
+    position: relative;
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    border: 2px solid var(--primary-neon);
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 20px var(--primary-neon);
+}
+
+#profile-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(1.1) contrast(1.1);
+}
+
+.glitch-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 0, 60, 0.2);
+    mix-blend-mode: overlay;
+    animation: glitch-anim 4s infinite linear alternate-reverse;
+    pointer-events: none;
+}
+
+h1 {
+    font-family: var(--font-cyber);
+    font-size: 1.8rem;
+    letter-spacing: 2px;
+    margin-bottom: 5px;
+    color: var(--primary-neon);
+    text-shadow: 0 0 10px var(--primary-neon), 2px 2px var(--secondary-neon);
+}
+
+.subtitle {
+    font-size: 0.9rem;
+    letter-spacing: 4px;
+    color: var(--secondary-neon);
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+/* Glitch Text Effect */
+.glitchText {
+    position: relative;
+}
+
+.glitchText::before,
+.glitchText::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.glitchText::before {
+    left: 2px;
+    text-shadow: -2px 0 var(--secondary-neon);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim-2 5s infinite linear alternate-reverse;
+}
+
+.glitchText::after {
+    left: -2px;
+    text-shadow: -2px 0 var(--primary-neon);
+    clip: rect(44px, 450px, 56px, 0);
+    animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+/* Links Section */
+.links-section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cyber-btn {
+    position: relative;
+    padding: 16px;
+    background: var(--btn-bg);
+    border: 2px solid var(--primary-neon);
+    text-decoration: none;
+    color: var(--text-color);
+    font-family: var(--font-cyber);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    overflow: hidden;
+    text-transform: uppercase;
+    backdrop-filter: blur(5px);
+    border-radius: 4px;
+    box-shadow: var(--glow-primary);
+}
+
+.cyber-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.4), transparent);
+    transition: 0.6s;
+}
+
+.cyber-btn:hover {
+    background: rgba(0, 243, 255, 0.15);
+    box-shadow: var(--glow-primary);
+    transform: scale(1.02);
+    border-color: var(--primary-neon);
+    color: #fff;
+}
+
+.cyber-btn i {
+    margin-right: 15px;
+    font-size: 1.3rem;
+    color: var(--primary-neon);
+}
+
+.cyber-btn.primary {
+    background: var(--secondary-neon);
+    border: 2px solid #ff4d7a;
+    color: white;
+    font-weight: 700;
+    margin-top: 15px;
+    box-shadow: var(--glow-secondary);
+}
+
+.cyber-btn.primary:hover {
+    background: transparent;
+    border-color: var(--secondary-neon);
+    color: var(--secondary-neon);
+    box-shadow: 0 0 40px rgba(255, 0, 60, 0.8);
+    transform: scale(1.05);
+}
+
+.cyber-btn.primary i {
+    color: white;
+}
+
+/* Footer */
+.footer {
+    margin-top: auto;
+    padding: 40px 0 20px;
+    text-align: center;
+    font-size: 0.6rem;
+    letter-spacing: 2px;
+    opacity: 0.5;
+}
+
+/* Animations */
+@keyframes glitch-anim {
+    0% { clip: rect(12px, 9999px, 86px, 0); }
+    5% { clip: rect(38px, 9999px, 92px, 0); }
+    10% { clip: rect(62px, 9999px, 14px, 0); }
+    15% { clip: rect(2px, 9999px, 55px, 0); }
+    20% { clip: rect(84px, 9999px, 3px, 0); }
+    /* ... add more steps if needed ... */
+    100% { clip: rect(10px, 9999px, 45px, 0); }
+}
+
+@keyframes glitch-anim-2 {
+    0% { clip: rect(32px, 9999px, 46px, 0); }
+    10% { clip: rect(18px, 9999px, 52px, 0); }
+    20% { clip: rect(62px, 9999px, 74px, 0); }
+    100% { clip: rect(20px, 9999px, 85px, 0); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 480px) {
+    .cyber-container {
+        padding: 20px 15px;
+    }
+    h1 {
+        font-size: 1.5rem;
+    }
+    .cyber-btn {
+        padding: 12px;
+        font-size: 0.8rem;
+    }
+}
