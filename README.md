@@ -6,8 +6,30 @@ Este é um projeto de cartão de visitas digital (VCard) com uma estética **Cyb
 
 - **Boot Sequence**: Uma sequência de inicialização simulada estilo terminal.
 - **Background Dinâmico**: Partículas interativas em canvas.
-- **Efeito 3D Tilt**: O cartão reage ao movimento do mouse ou inclinação do dispositivo (giroscópio).
+- **Efeito 3D Tilt (Desativado)**: O cartão reage ao movimento do mouse ou inclinação do dispositivo. *(Atualmente desativado via comentário no código)*.
 - **Compartilhamento**: Modal com QR Code gerado dinamicamente e integração com a API de compartilhamento nativa.
+
+---
+
+## ⚙️ Como Reativar o Efeito 3D Tilt
+
+O efeito de inclinação 3D foi desativado a pedido, mas o código foi mantido comentado para facilitar a reativação. Siga os passos abaixo para ativar novamente:
+
+### 1. No arquivo `script.js`
+Localize o bloco numerado como `// 3. 3D Tilt Effect & Sensors` (por volta da linha 298) e remova as tags de comentário `/*` no início e `*/` no final do bloco.
+
+### 2. No arquivo `index.css`
+Localize os estilos comentados e reative-os:
+- Na regra `body`, descomente a linha `/* perspective: 1000px; */`.
+- Na regra `.cyber-container`, descomente o bloco:
+```css
+transform-style: preserve-3d;
+transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+transition: transform 0.2s ease-out;
+```
+
+---
+
 - **Salvar Contato**: Gera e baixa automaticamente um arquivo `.vcf` (vCard) com foto de perfil incluída.
 
 ---

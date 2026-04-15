@@ -295,6 +295,7 @@ URL;TYPE=Instagram:${contact.instagram}`;
     };
     animateParticles();
 
+    /*
     // 3. 3D Tilt Effect & Sensors
     const mainCard = document.getElementById('main-card');
     let hasSensorPermission = false;
@@ -364,4 +365,5 @@ URL;TYPE=Instagram:${contact.instagram}`;
     // Trigger permission on first interaction
     document.addEventListener('mousedown', requestSensorPermission, { once: true });
     document.addEventListener('touchstart', requestSensorPermission, { once: true });
+    */
 });

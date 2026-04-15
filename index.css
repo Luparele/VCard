@@ -48,7 +48,7 @@ body {
     min-height: 100vh;
     display: flex;
     justify-content: center;
-    perspective: 1000px; /* For 3D Tilt */
+    /* perspective: 1000px; */ /* Para 3D Tilt */
 }
 
 
@@ -62,9 +62,11 @@ body {
     align-items: center;
     min-height: 100vh;
     z-index: 1;
+    /* 
     transform-style: preserve-3d;
     transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
     transition: transform 0.2s ease-out;
+    */
 }
 
 
