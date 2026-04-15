@@ -39,6 +39,30 @@ END:VCARD`;
         }, 3000);
     });
 
+    const btnShare = document.getElementById('btn-share');
+    btnShare.addEventListener('click', async () => {
+        const shareData = {
+            title: 'Eduardo Luparele | VCard',
+            text: 'Confira o cartão de visitas digital de Eduardo Luparele!',
+            url: window.location.href
+        };
+
+        try {
+            if (navigator.share) {
+                await navigator.share(shareData);
+            } else {
+                // Fallback: Copy to clipboard
+                await navigator.clipboard.writeText(window.location.href);
+                btnShare.querySelector('.btn-content').innerHTML = '<i class="fas fa-check"></i> LINK COPIADO';
+                setTimeout(() => {
+                    btnShare.querySelector('.btn-content').innerHTML = '<i class="fas fa-share-nodes"></i> COMPARTILHAR';
+                }, 3000);
+            }
+        } catch (err) {
+            console.error('Erro ao compartilhar:', err);
+        }
+    });
+
     // Add random glitch intensity to certain elements
     const glitchIntensity = () => {
         const text = document.querySelector('.glitchText');
