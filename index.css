@@ -244,6 +244,8 @@ h1 {
     font-weight: 700;
     margin-top: 15px;
     box-shadow: var(--glow-secondary);
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .cyber-btn.primary:hover {
