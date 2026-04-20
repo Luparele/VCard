@@ -8,6 +8,8 @@ Este é um projeto de cartão de visitas digital (VCard) com uma estética **Cyb
 - **Background Dinâmico**: Partículas interativas em canvas.
 - **Efeito 3D Tilt (Desativado)**: O cartão reage ao movimento do mouse ou inclinação do dispositivo. *(Atualmente desativado via comentário no código)*.
 - **Compartilhamento**: Modal com QR Code gerado dinamicamente e integração com a API de compartilhamento nativa.
+- **Salvar Contato**: Gera e baixa automaticamente um arquivo `.vcf` (vCard) com foto de perfil incluída.
+- **Pagamento PIX**: Modal dedicado para pagamentos via PIX com QR Code estático e funcionalidade de copiar chave aleatória com um clique.
 
 ---
 
@@ -30,17 +32,13 @@ transition: transform 0.2s ease-out;
 
 ---
 
-- **Salvar Contato**: Gera e baixa automaticamente um arquivo `.vcf` (vCard) com foto de perfil incluída.
+## 🛠️ Como Atualizar os Links e Informações
 
----
-
-## 🛠️ Como Atualizar os Links
-
-Para personalizar o VCard com seus próprios links e informações, você deve alterar dois arquivos principais:
+Para personalizar o VCard com seus próprios links e informações, você deve alterar os arquivos principais:
 
 ### 1. No arquivo `index.html`
 
-Localize a seção `<main class="links-section">` (aproximadamente na linha 68) e altere os atributos `href` dos links:
+Localize a seção `<main class="links-section">` e altere os atributos `href` dos links:
 
 - **WhatsApp**: Procure por `id="btn-whatsapp"` e altere o número no link `https://wa.me/SEU_NUMERO`.
 - **Instagram**: Procure por `id="btn-instagram"` e coloque sua URL.
@@ -48,7 +46,11 @@ Localize a seção `<main class="links-section">` (aproximadamente na linha 68) 
 - **GitHub**: Procure por `id="btn-github"` e coloque sua URL.
 - **E-mail**: Procure por `id="btn-email"` e altere o `mailto:seuemail@gmail.com`.
 
-### 2. No arquivo `script.js`
+### 2. Chave PIX
+
+No arquivo **`script.js`**, localize a constante `pixKey` (aproximadamente na linha 374) e substitua pela sua chave aleatória ou CPF/E-mail. Altere também o QR Code salvando sua imagem como `PIX.jpeg` dentro da pasta `img/`.
+
+### 3. Objeto de Contato (`script.js`)
 
 Para que o botão **"SALVAR CONTATO"** funcione corretamente, você deve atualizar o objeto `contact` no início do arquivo (aproximadamente na linha 21):
 
@@ -63,13 +65,13 @@ const contact = {
 };
 ```
 
-### 3. Foto de Perfil
+### 4. Foto de Perfil e Assets
 
-Para alterar a foto:
-1. Substitua o arquivo `perfil.jpeg` por uma imagem sua (mantenha o mesmo nome e extensão para facilitar).
-2. Se optar por usar outro nome ou extensão (ex: `foto.png`), lembre-se de atualizar:
-   - A linha 61 do `index.html`: `<img src="foto.png" ...>`
-   - A linha 7 do `script.js`: `const response = await fetch('foto.png');`
+Todas as imagens devem ser colocadas na pasta **`img/`**.
+- Para alterar a foto de perfil: Substitua o arquivo `img/perfil.jpeg` por uma imagem sua (mantenha o mesmo nome e extensão).
+- Se optar por outro nome:
+   - Atualize a linha 61 do `index.html`: `<img src="img/suafoto.png" ...>`
+   - Atualize a linha 7 do `script.js`: `const response = await fetch('img/suafoto.png');`
 
 ---
 
@@ -78,7 +80,8 @@ Para alterar a foto:
 - **HTML5 / CSS3 / JavaScript** (Vanilla)
 - **Font Awesome** (Ícones)
 - **Google Fonts** (Orbitron & Rajdhani)
-- **QRCode.js** (Geração de QR Code)
+- **QRCode.js** (Geração de QR Code dinâmico para compartilhamento)
+- **Ícone Oficial do PIX** (Icons8)
 
 ---
 
