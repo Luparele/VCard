@@ -1,43 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Theme Logic ---
-    const themes = [
-        { id: 'default', icon: '🤖' },
-        { id: 'matrix', icon: '🟩' },
-        { id: 'synthwave', icon: '🌴' },
-        { id: 'light', icon: '☀️' }
-    ];
-    let currentThemeIndex = 0;
-    
-    const themeSwitchBtn = document.getElementById('theme-switch-btn');
 
-    const setTheme = (themeId) => {
-        if (themeId === 'default') {
-            document.documentElement.removeAttribute('data-theme');
-        } else {
-            document.documentElement.setAttribute('data-theme', themeId);
-        }
-        localStorage.setItem('vcard-theme', themeId);
-        
-        // Update button icon
-        const themeObj = themes.find(t => t.id === themeId) || themes[0];
-        themeSwitchBtn.innerText = themeObj.icon;
-        
-        // Trigger particles redraw
-        if (typeof updateParticleColors === 'function') {
-            updateParticleColors();
-        }
-    };
-
-    // Load saved theme
-    const savedTheme = localStorage.getItem('vcard-theme') || 'default';
-    currentThemeIndex = Math.max(0, themes.findIndex(t => t.id === savedTheme));
-    setTheme(themes[currentThemeIndex].id);
-
-    themeSwitchBtn.addEventListener('click', () => {
-        currentThemeIndex = (currentThemeIndex + 1) % themes.length;
-        setTheme(themes[currentThemeIndex].id);
-    });
-    // -------------------
 
     const btnSaveContact = document.getElementById('btn-save-contact');
 
@@ -288,22 +250,7 @@ URL;TYPE=Instagram:${contact.instagram}`;
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    let particleColors = ['#00f3ff', '#ff003c'];
-
-    window.updateParticleColors = () => {
-        const rootStyles = getComputedStyle(document.documentElement);
-        const primary = rootStyles.getPropertyValue('--primary-neon').trim() || '#00f3ff';
-        const secondary = rootStyles.getPropertyValue('--secondary-neon').trim() || '#ff003c';
-        particleColors = [primary, secondary];
-        
-        // Update existing particles to new theme immediately
-        particles.forEach(p => {
-            p.color = Math.random() > 0.5 ? particleColors[0] : particleColors[1];
-        });
-    };
-
-    // Run once to initialize colors
-    updateParticleColors();
+    const particleColors = ['#00f3ff', '#ff003c']; // Default Cyberpunk colors
 
     class Particle {
         constructor() {

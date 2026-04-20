@@ -31,19 +31,28 @@
 
 </head>
 <body>
-    <!-- Theme Switcher -->
-    <div class="theme-switcher">
-        <button class="theme-switch-btn" id="theme-switch-btn" title="Mudar Tema">🤖</button>
-    </div>
+
 
     <!-- Loading Screen -->
     <div id="loading-screen">
-        <div id="boot-terminal" class="boot-terminal"></div>
-        <div class="loading-content" id="loading-spinner" style="display: none;">
-            <div class="cyber-spinner"></div>
-            <p class="loading-text" data-text="INITIALIZING SYSTEM...">INITIALIZING SYSTEM...</p>
-            <div class="loading-bar-container">
-                <div class="loading-bar"></div>
+        <div class="loading-wrapper">
+            <div class="terminal-container">
+                <div class="terminal-header">
+                    <div class="terminal-controls">
+                        <span class="control-btn minimize"></span>
+                        <span class="control-btn maximize"></span>
+                        <span class="control-btn close"></span>
+                    </div>
+                    <div class="terminal-title">Terminal@System:~</div>
+                </div>
+                <div id="boot-terminal" class="boot-terminal"></div>
+            </div>
+            <div class="loading-content" id="loading-spinner" style="display: none;">
+                <div class="cyber-spinner"></div>
+                <p class="loading-text" data-text="INITIALIZING SYSTEM...">INITIALIZING SYSTEM...</p>
+                <div class="loading-bar-container">
+                    <div class="loading-bar"></div>
+                </div>
             </div>
         </div>
     </div>

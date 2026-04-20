@@ -10,6 +10,8 @@ Este é um projeto de cartão de visitas digital (VCard) com uma estética **Cyb
 - **Compartilhamento**: Modal com QR Code gerado dinamicamente e integração com a API de compartilhamento nativa.
 - **Salvar Contato**: Gera e baixa automaticamente um arquivo `.vcf` (vCard) com foto de perfil incluída.
 - **Pagamento PIX**: Modal dedicado para pagamentos via PIX com QR Code estático e funcionalidade de copiar chave aleatória com um clique.
+- **Ícones Pulsantes**: Efeito visual de pulsação nos botões de Compartilhar e PIX para incentivar a interação do usuário.
+- **Micro-interações**: Feedback visual ao copiar links e chaves PIX.
 
 ---
 
