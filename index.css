@@ -693,3 +693,102 @@ h1 {
     0% { left: -100%; }
     100% { left: 100%; }
 }
+
+/* PIX Integration */
+.actions-group {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.actions-group .cyber-btn.primary {
+    margin: 0;
+    flex: 1;
+}
+
+.pix-btn-trigger {
+    background: transparent;
+    border: 2px solid #3ddc84;
+    color: #3ddc84;
+    width: 60px;
+    height: 54px;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 10px rgba(61, 220, 132, 0.3);
+}
+
+.pix-btn-trigger:hover {
+    background: rgba(61, 220, 132, 0.1);
+    box-shadow: 0 0 20px #3ddc84;
+    transform: scale(1.05);
+}
+
+.pix-icon-img {
+    width: 35px;
+    height: 35px;
+    object-fit: contain;
+}
+
+.pix-qrcode-wrapper {
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: inline-block;
+    box-shadow: 0 0 20px rgba(61, 220, 132, 0.4);
+}
+
+.pix-img {
+    width: 100%;
+    max-width: 200px;
+    display: block;
+}
+
+.pix-key-container {
+    display: flex;
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px dashed var(--primary-neon);
+    padding: 12px;
+    border-radius: 4px;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.pix-key-container:hover {
+    background: rgba(0, 243, 255, 0.05);
+    border-style: solid;
+}
+
+.pix-key-text {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.85rem;
+    color: var(--primary-neon);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-right: 10px;
+}
+
+.copy-pix-btn {
+    background: transparent;
+    border: none;
+    color: var(--primary-neon);
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.pix-instructions {
+    font-size: 0.7rem;
+    opacity: 0.6;
+    letter-spacing: 1px;
+}

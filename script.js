@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Convert image to Base64 for vCard
     const getProfileImageBase64 = async () => {
         try {
-            const response = await fetch('perfil.jpeg');
+            const response = await fetch('img/perfil.jpeg');
             const blob = await response.blob();
             return new Promise((resolve) => {
                 const reader = new FileReader();
@@ -421,6 +421,54 @@ URL;TYPE=Instagram:${contact.instagram}`;
 
     // Trigger permission on first interaction
     document.addEventListener('mousedown', requestSensorPermission, { once: true });
-    document.addEventListener('touchstart', requestSensorPermission, { once: true });
     */
+    // --- PIX MODAL LOGIC ---
+    const btnPixTrigger = document.getElementById('btn-pix-trigger');
+    const pixModal = document.getElementById('pix-modal');
+    const btnClosePixModal = document.getElementById('btn-close-pix-modal');
+    const btnCopyPix = document.getElementById('btn-copy-pix');
+    const pixKeyArea = document.getElementById('pix-key-area');
+    const pixKey = "00020126330014BR.GOV.BCB.PIX0111099951467975204000053039865802BR5923EDUARDO LUPARELE COELHO6015SAO JOAO DE MER622605226BFugPkIiGdVkohZORjuCv63047D88";
+
+    const openPixModal = () => {
+        pixModal.classList.add('active');
+    };
+
+    const closePixModal = () => {
+        pixModal.classList.remove('active');
+    };
+
+    const copyPixKey = async () => {
+        try {
+            await navigator.clipboard.writeText(pixKey);
+            showFeedback('CHAVE PIX COPIADA!');
+            
+            // Visual feedback on the container
+            pixKeyArea.style.borderColor = '#3ddc84';
+            pixKeyArea.style.boxShadow = '0 0 15px rgba(61, 220, 132, 0.4)';
+            const originalIcon = btnCopyPix.innerHTML;
+            btnCopyPix.innerHTML = '<i class="fas fa-check" style="color: #3ddc84"></i>';
+            
+            setTimeout(() => {
+                pixKeyArea.style.borderColor = 'var(--primary-neon)';
+                pixKeyArea.style.boxShadow = 'none';
+                btnCopyPix.innerHTML = originalIcon;
+            }, 2000);
+        } catch (err) {
+            console.error('Erro ao copiar chave PIX:', err);
+            showFeedback('ERRO AO COPIAR');
+        }
+    };
+
+    btnPixTrigger.addEventListener('click', openPixModal);
+    btnClosePixModal.addEventListener('click', closePixModal);
+    btnCopyPix.addEventListener('click', (e) => {
+        e.stopPropagation();
+        copyPixKey();
+    });
+    pixKeyArea.addEventListener('click', copyPixKey);
+
+    pixModal.addEventListener('click', (e) => {
+        if (e.target === pixModal) closePixModal();
+    });
 });
